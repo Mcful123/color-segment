@@ -7,5 +7,6 @@ original
 
          K=2                      K=3                        K=4 
 <img src="combined.png" height="200">
-</prev>
+</pre>
+
 With some clever logic and modification, it may be possible to only isolate the pixels on the image that are powder.
