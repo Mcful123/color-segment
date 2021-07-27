@@ -12,8 +12,7 @@ import matplotlib.pyplot as plt
 import os
 
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
-# image = cv.imread('C:/Users/chomi/Desktop/all_small/A0159-0009.png')
-# image = cv.imread('C:/Users/chomi/Desktop/est.jpg')
+
 def image_resize(image, width = None, height = None, inter = cv.INTER_AREA):
     dim = None
     (h, w) = image.shape[:2]
@@ -29,10 +28,11 @@ def image_resize(image, width = None, height = None, inter = cv.INTER_AREA):
     return resized
 
 crit = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 100, 0.2)
-for filename in os.listdir('C:/Users/chomi/Desktop/all_crop/'):
+impath = 'C:/Users/chomi/Desktop/all_crop/'
+for filename in os.listdir(impath):
     if(filename.endswith('.png')):
         print(filename)
-        image = cv.imread('C:/Users/chomi/Desktop/all_crop/' + filename)
+        image = cv.imread(impath + filename)
         temp = image_resize(image, width = 400)
         cv.imshow('og', temp)
         pixs = image.reshape((-1,3))
@@ -45,7 +45,6 @@ for filename in os.listdir('C:/Users/chomi/Desktop/all_crop/'):
         segim = centers[labels_.flatten()]
         segim1 = segim.reshape(image.shape)
         tempp = image_resize(segim1, width = 400)
-        cv.imshow('a',tempp)
         
         k = 3
         pixs = image.reshape((-1,3))
@@ -56,7 +55,6 @@ for filename in os.listdir('C:/Users/chomi/Desktop/all_crop/'):
         segim = centers[labels_.flatten()]
         segim2 = segim.reshape(image.shape)
         temppp = image_resize(segim2, width = 400)
-        cv.imshow('ab',temppp)
         
         k = 4
         pixs = image.reshape((-1,3))
@@ -67,19 +65,12 @@ for filename in os.listdir('C:/Users/chomi/Desktop/all_crop/'):
         segim = centers[labels_.flatten()]
         segim3 = segim.reshape(image.shape)
         tempppp = image_resize(segim3, width = 400)
-        cv.imshow('abc', tempppp)
         
+        stacked = cv.hconcat([tempp, temppp, tempppp])
+        cv.imshow('combined', stacked)
         key = cv.waitKey(0)
-        if(key == ord('0')):
+        if(key == ord('q')):
             break
-        elif(key == ord('1')):
-            cv.imwrite('C:/Users/chomi/Desktop/maskss/' + filename, segim1)
-        elif(key == ord('2')):
-            cv.imwrite('C:/Users/chomi/Desktop/maskss/' + filename, segim2)
-        elif(key == ord('3')):
-            cv.imwrite('C:/Users/chomi/Desktop/maskss/' + filename, segim3)
-        elif(key == ord('m')):
-            continue
             
         cv.destroyAllWindows()
     
