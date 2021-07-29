@@ -9,4 +9,4 @@ original
 <img src="combined.png" height="200">
 </pre>
 
-With some clever logic and modification, it may be possible to only isolate the pixels on the image that are powder.
+With some clever logic and modification, it may be possible to only isolate the pixels on the image that are powder. Or it can be used to help make masks for image segmentation. 
